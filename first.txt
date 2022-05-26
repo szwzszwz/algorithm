@@ -1,0 +1,184 @@
+1.Hanoi塔问题的递归求解实现
+实验目的：学会使用递归方式求解问题
+问题分析：用递归的方法求解问题
+算法思路：用递归的方法求解问题
+伪代码：
+move(A,B){
+	print(A,B)
+}
+
+han_nuo(n,A,B,C){
+	if(n = 1) then move(A,C)
+	else{
+		han_nuo(n - 1,A,C,B);
+		move(A,C);
+		han_nuo(n - 1,B,A,C);
+	}
+}
+	
+main()
+{
+	input(n)
+	han_nuo(n,'A','B','C');
+}
+数据结构：无
+c语言源代码：
+#include<stdio.h>
+#include<string.h>
+
+void move(char A,char B)
+{
+	printf("%c ---> %c\n",A,B);
+}
+
+void han_nuo(int n,char A,char B,char C)
+{
+	if(n == 1) move(A,C);
+	else{
+		han_nuo(n - 1,A,C,B);
+		move(A,C);
+		han_nuo(n - 1,B,A,C);
+	}
+}
+
+int main()
+{
+	int n;
+	printf("请输入：");
+	scanf("%d",&n);
+	han_nuo(n,'A','B','C');
+	return 0;
+ } 
+运行结果：
+请输入：3
+A ---> C
+A ---> B
+C ---> B
+A ---> C
+B ---> A
+B ---> C
+A ---> C
+代码调试收获：会使用递归，熟悉递归流程
+
+
+2.Hanoi塔问题的非递归求解实现
+实验目的：学会将递归方式转换成迭代求解问题
+问题分析：将递归转换成迭代的方式求解问题
+算法思路：将递归转换成迭代的方式求解问题
+数据结构：无
+伪代码：
+
+move(A,B)
+{
+	print(A,"--->",B);
+}
+
+han_nuo(n,A,B,C)
+{	
+	for(i = 1 to pow(2,n))  
+	{
+		k = 1
+		m = i
+		while(m % 2 == 0)  
+		{
+			k++
+			m /= 2
+		}
+		if((n - k) % 2 = 0) then
+		{
+			d = C
+			t = B
+		}else{
+			d = B
+			t = C
+		}
+		h = (m + 1) / 2
+		switch(h % 3)
+		{
+			case 0:
+				move(t,s)
+				break
+			case 1:
+				move(s,d)
+				break
+			case 2:
+				move(d,t)
+				break
+		}
+	}
+
+}
+
+main()
+{
+	input(n)
+	han_nuo(n,'A','B','C')
+ } 
+C语言源代码：
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+
+void move(char A,char B)
+{
+	printf("%c ---> %c\n",A,B);
+}
+
+void han_nuo(int n,char A,char B,char C)
+{
+	char s = A;
+	char d,t;
+	int i,m,k,h;
+	
+	for(i = 1;i <= pow(2,n) - 1;i++) // pow 2的n次方 
+	{
+		k = 1;
+		m = i;
+		while(m % 2 == 0) // 求第i次移动的时候被移动圆盘的编号 
+		{
+			k++;
+			m /= 2;
+		}
+		if((n - k) % 2 == 0) // 求k号圆盘第一次移动的时候的目的塔 
+		{
+			d = C;
+			t = B;
+		}else{
+			d = B;
+			t = C;
+		}
+		h = (m + 1) / 2;
+		switch(h % 3)
+		{
+			case 0:
+				move(t,s);
+				break;
+			case 1:
+				move(s,d);
+				break;
+			case 2:
+				move(d,t);
+				break;
+		}
+	}
+
+}
+
+int main()
+{
+	int n;
+	printf("请输入：");
+	scanf("%d",&n);
+	han_nuo(n,'A','B','C');
+	return 0;
+ } 
+运行结果：
+请输入：3
+A ---> C
+A ---> B
+C ---> B
+A ---> C
+B ---> A
+B ---> C
+A ---> C
+代码调试收获：学会将递归转换成迭代的方法
